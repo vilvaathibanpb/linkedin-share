@@ -18,7 +18,7 @@ const ProfileList = ({ profiles }) => {
                 rel="noopener noreferrer"
                 className="text-orange-500 hover:underline flex"
               >
-                <img height={25} width={25} className='mr-4' src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png' />LinkedIn Profile
+                <img alt="linkedin logo" height={25} width={25} className='mr-4' src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png' />LinkedIn Profile
               </a>
             </div>
             </div>
