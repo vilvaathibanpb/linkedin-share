@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useEffect, useState } from "react";
+import AddProfileModal from "./AddProfileModal";
+import ProfileList from "./ProfileList";
 
-function App() {
+const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    refreshProfiles();
+  }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const refreshProfiles = async () => {
+    const response = await fetch("https://65b052f02f26c3f2139caf7a.mockapi.io/api/profile");
+    const profiles = await response.json();
+    setProfiles(profiles);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="bg-purple-900 min-h-screen min-w-screen w-full h-full">
+      <div className="container mx-auto p-8 flex justify-around items-center flex-col md:flex-row">
+        <h1 className="text-4xl font-bold text-white">
+          Young Talents Summit - Kinnevik
+        </h1>
+        <button
+          onClick={openModal}
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-10 md:mt-0"
         >
-          Learn React
-        </a>
-      </header>
+          Add Your Profile
+        </button>
+      </div>
+      <div className="text-white md:p-32 p-8">
+      <ProfileList profiles={profiles} />
+      </div>
+      <AddProfileModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSave={refreshProfiles}
+      />
     </div>
   );
-}
+};
 
 export default App;
